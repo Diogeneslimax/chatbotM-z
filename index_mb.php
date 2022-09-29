@@ -352,9 +352,9 @@ if ($_REQUEST['event'] != 'ONIMBOTJOINCHAT') {
 
                 return true;
 
-            } elseif ($row['ETAPA'] == '5' && $row['NEGATIVADO'] == '1' &&  $_REQUEST['data']['PARAMS']['MESSAGE'] == '2') {
+            } elseif ($row['ETAPA'] == '7' && $row['NEGATIVADO'] == '1' &&  $_REQUEST['data']['PARAMS']['MESSAGE'] == '2') {
 
-                $query = "UPDATE conversas SET `ETAPA` = '7'" . " WHERE `ID` = '" . $row['ID'] . "'";
+                $query = "UPDATE conversas SET `ETAPA` = '8'" . " WHERE `ID` = '" . $row['ID'] . "'";
 
                 $result = mysqli_query($conn, $query);
 
@@ -364,7 +364,7 @@ if ($_REQUEST['event'] != 'ONIMBOTJOINCHAT') {
                     'BOT_ID=' . $config['BOT_ID'] . '&',
                     'CLIENT_ID=' . $config['CLIENT_ID'] . '&',
                     'DIALOG_ID=chat' . $_REQUEST['data']['PARAMS']['CHAT_ID'] . '&',
-                    'MESSAGE=' . $config['LINK']
+                    'MESSAGE=' . $config['ENC1']
 
                 ));
 
