@@ -8,6 +8,7 @@ $config = array(
     'CLIENT_ID' => 'q0lkcm5cqdlcbuiuukkvszz13n7itpsk',
     'URL' => 'https://uctdemo.bitrix24.com/rest/426/k6hh18oim2n9cil6/',
     /*Mensagens do Atendimento MOZ Positivo*/
+
     /*Mensagens Iniciais*/
     'SAUDACAO' => "Seja bem-vindo ao canal *MOZ POSITIVO*, seu novo recomeço!💛🧡💛",
     'CAPTURA_PERGUNTA' => "Agradecemos seu contato😊",
@@ -33,23 +34,28 @@ $config = array(
     'OPCAOVIDEO2' => '*2* _Com toda Certeza_',
     'OPCAOVIDEO3' => '*3* _Não no momento_',
     'ENC1' => 'Irei lhe direcionar para um dos nossos atendentes! Aguarde um instante que em breve você será atendido! 😉',
-    'ENC2' => 'Agradecemos seu contato',
+    'ENC2' => '💛🧡💛A Moz Positivo agradece seu contato!💛🧡💛',
      /*Falando com QUEM NÃO POSSUI DIVIDA*/
     'CONSULTA1' => 'Legal, vamos realizar uma consulta?🤔',
     'OPCAO_CONS1' => '*1.* _Sim_',
     'OPCAO_CONS2' => '*2.* _Não_',
     'MENS_ENC1' => 'A *MOZ POSITIVO* agradeçe seu contato! Nos vemos em breve! 😉',
-    'VALORES' => '*1-* _SERASA R$ 30,00_',
+    'VALORES' => '*Voce tem essas opções de consulta:*',
+    'VALORES1' => '*1-* _SERASA R$ 30,00_',
     'VALORES2' =>'*2-* _BOA VISTA R$ 15,00_',
     'VALORES3' => '*3-* _COMPLETA R$ 45,00_',
     'DOC' => '*Qual documento deseja consultar?*',
     'DOC_OPC1' => 'CPF',
     'DOC_OPC2' => 'CNPJ',
     'DOC_OPC3' => 'AMBOS',    
-    'CAPTURA_CPF' => 'Qual nº do *Documento* para consulta?',
+    'CAPTURA_DOCUMENTO' => 'Qual *Documento* deseja consultar?',
+    'CAPTURA_CPF' => 'CPF',
+    'CAPTURA_CNPJ' => 'CNPJ',
+    'CAPTURA_AMBOS' => 'AMBOS',
+    'CAPTURA_NUMERODOC' => 'Qual o Numero de documento para consulta?',
     'ENC_CONS' => 'Legal, segue dados de pagamento da consulta, em alguns minutos você receberá sua consulta por aqui',    
-    'FORA_ENC2' => ' PIX: *financeiro@mozpositivo.com.br*',
-    'FORA_ENC2' => 'Após envio do comprovante, sua consulta chegará até voce! 😉. A *MOZ Positivo* agradece!',
+    'FORA_ENC2' => '*PIX:* _financeiro@mozpositivo.com.br_',
+    'FORA_ENC3' => 'Após envio do comprovante, sua consulta chegará até voce! 😉. A *MOZ Positivo* agradece!',
         
 
 

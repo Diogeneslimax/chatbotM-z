@@ -143,6 +143,10 @@ if ($_REQUEST['event'] != 'ONIMBOTJOINCHAT') {
                 $row = mysqli_fetch_assoc($result);
             }
 
+            $query = "SELECT * FROM conversas WHERE CHAT_ID = '" . $_REQUEST['data']['PARAMS']['TO_CHAT_ID'] . "'AND URL = '" . $_REQUEST['auth']['domain'] . "'";
+
+            $result = mysqli_query($conn, $query);
+            $row = mysqli_fetch_assoc($result);
 
             if ($row['NEGATIVADO'] == '1' && $row['ETAPA'] == '3') {
 
@@ -289,12 +293,29 @@ if ($_REQUEST['event'] != 'ONIMBOTJOINCHAT') {
     
                     ));
                   
-                   
+                } elseif ($row['ETAPA'] == '6' && $row['NEGATIVADO'] == '1' &&  $_REQUEST['data']['PARAMS']['MESSAGE']== '2') {
+
+                    $query = "UPDATE conversas SET `ETAPA` = '7'" . " WHERE `ID` = '" . $row['ID'] . "'";
+    
+                    $result = mysqli_query($conn, $query);
+                    
+            
+                        controler_bot($config['URL'], $metodos['ENVIAR'], array(
+        
+                            'BOT_ID=' . $config['BOT_ID'] . '&',
+                            'CLIENT_ID=' . $config['CLIENT_ID'] . '&',
+                            'DIALOG_ID=chat' . $_REQUEST['data']['PARAMS']['CHAT_ID'] . '&',
+                            'MESSAGE=' . $config['ENC2']
+        
+                        ));
+
+                   //encerrar conversa
+                   //zerar etapa e negativado
             
 
                 } elseif ($row['ETAPA'] == '6' && $row['NEGATIVADO'] == '1' &&  $_REQUEST['data']['PARAMS']['MESSAGE']== '1') {
 
-                    $query = "UPDATE conversas SET `ETAPA` = '7'" . " WHERE `ID` = '" . $row['ID'] . "'";
+                    $query = "UPDATE conversas SET `ETAPA` = '8'" . " WHERE `ID` = '" . $row['ID'] . "'";
     
                     $result = mysqli_query($conn, $query);
                     
@@ -320,6 +341,7 @@ if ($_REQUEST['event'] != 'ONIMBOTJOINCHAT') {
 
                 ));
                 sleep(1);
+
                 controler_bot($config['URL'], $metodos['ENVIAR'], array(
 
                     'BOT_ID=' . $config['BOT_ID'] . '&',
@@ -328,6 +350,7 @@ if ($_REQUEST['event'] != 'ONIMBOTJOINCHAT') {
                     'MESSAGE=' . $config['OPCAOVIDEO1']
 
                 ));
+
                 sleep(1);
 
                 controler_bot($config['URL'], $metodos['ENVIAR'], array(
@@ -350,11 +373,11 @@ if ($_REQUEST['event'] != 'ONIMBOTJOINCHAT') {
 
                 ));
 
-                return true;
+               
 
-            } elseif ($row['ETAPA'] == '7' && $row['NEGATIVADO'] == '1' &&  $_REQUEST['data']['PARAMS']['MESSAGE'] == '2') {
+            } elseif ($row['ETAPA'] == '8' && $row['NEGATIVADO'] == '1' &&  $_REQUEST['data']['PARAMS']['MESSAGE'] == '1') {
 
-                $query = "UPDATE conversas SET `ETAPA` = '8'" . " WHERE `ID` = '" . $row['ID'] . "'";
+                $query = "UPDATE conversas SET `ETAPA` = '9'" . " WHERE `ID` = '" . $row['ID'] . "'";
 
                 $result = mysqli_query($conn, $query);
 
@@ -367,6 +390,41 @@ if ($_REQUEST['event'] != 'ONIMBOTJOINCHAT') {
                     'MESSAGE=' . $config['ENC1']
 
                 ));
+
+                
+            } elseif ($row['ETAPA'] == '8' && $row['NEGATIVADO'] == '1' &&  $_REQUEST['data']['PARAMS']['MESSAGE'] == '2') {
+
+                $query = "UPDATE conversas SET `ETAPA` = '10'" . " WHERE `ID` = '" . $row['ID'] . "'";
+
+                $result = mysqli_query($conn, $query);
+
+
+                controler_bot($config['URL'], $metodos['ENVIAR'], array(
+
+                    'BOT_ID=' . $config['BOT_ID'] . '&',
+                    'CLIENT_ID=' . $config['CLIENT_ID'] . '&',
+                    'DIALOG_ID=chat' . $_REQUEST['data']['PARAMS']['CHAT_ID'] . '&',
+                    'MESSAGE=' . $config['ENC1']
+
+                ));
+                
+            } elseif ($row['ETAPA'] == '8' && $row['NEGATIVADO'] == '1' &&  $_REQUEST['data']['PARAMS']['MESSAGE'] == '3') {
+
+                $query = "UPDATE conversas SET `ETAPA` = '10'" . " WHERE `ID` = '" . $row['ID'] . "'";
+
+                $result = mysqli_query($conn, $query);
+
+
+                controler_bot($config['URL'], $metodos['ENVIAR'], array(
+
+                    'BOT_ID=' . $config['BOT_ID'] . '&',
+                    'CLIENT_ID=' . $config['CLIENT_ID'] . '&',
+                    'DIALOG_ID=chat' . $_REQUEST['data']['PARAMS']['CHAT_ID'] . '&',
+                    'MESSAGE=' . $config['ENC2']
+
+                ));
+
+/*Lógica do Bot Caminho onde não é Negativado*/
 
 
             } elseif ($row['NEGATIVADO'] == '2'&& $row['ETAPA'] == 3) {
@@ -391,7 +449,45 @@ if ($_REQUEST['event'] != 'ONIMBOTJOINCHAT') {
                     'BOT_ID=' . $config['BOT_ID'] . '&',
                     'CLIENT_ID=' . $config['CLIENT_ID'] . '&',
                     'DIALOG_ID=chat' . $_REQUEST['data']['PARAMS']['CHAT_ID'] . '&',
+                    'MESSAGE=' . $config['OPCAO_CONS1']
+
+                ));
+
+                sleep(1);
+
+                controler_bot($config['URL'], $metodos['ENVIAR'], array(
+
+                    'BOT_ID=' . $config['BOT_ID'] . '&',
+                    'CLIENT_ID=' . $config['CLIENT_ID'] . '&',
+                    'DIALOG_ID=chat' . $_REQUEST['data']['PARAMS']['CHAT_ID'] . '&',
+                    'MESSAGE=' . $config['OPCAO_CONS2']
+
+                ));
+
+                      } elseif ($row['ETAPA'] == '4' && $row['NEGATIVADO'] == '2' &&  $_REQUEST['data']['PARAMS']['MESSAGE'] == '1') {
+
+                $query = "UPDATE conversas SET `ETAPA` = '5'" . " WHERE `ID` = '" . $row['ID'] . "'";
+
+                $result = mysqli_query($conn, $query);
+
+
+                controler_bot($config['URL'], $metodos['ENVIAR'], array(
+
+                    'BOT_ID=' . $config['BOT_ID'] . '&',
+                    'CLIENT_ID=' . $config['CLIENT_ID'] . '&',
+                    'DIALOG_ID=chat' . $_REQUEST['data']['PARAMS']['CHAT_ID'] . '&',
                     'MESSAGE=' . $config['VALORES']
+
+                ));
+
+                sleep(1);
+
+                controler_bot($config['URL'], $metodos['ENVIAR'], array(
+
+                    'BOT_ID=' . $config['BOT_ID'] . '&',
+                    'CLIENT_ID=' . $config['CLIENT_ID'] . '&',
+                    'DIALOG_ID=chat' . $_REQUEST['data']['PARAMS']['CHAT_ID'] . '&',
+                    'MESSAGE=' . $config['VALORES1']
 
                 ));
 
@@ -416,6 +512,22 @@ if ($_REQUEST['event'] != 'ONIMBOTJOINCHAT') {
                     'MESSAGE=' . $config['VALORES3']
 
                 ));
+                
+            } elseif ($row['ETAPA'] == '5' && $row['NEGATIVADO'] == '2') {
+
+                $query = "UPDATE conversas SET `ETAPA` = '6'" . " WHERE `ID` = '" . $row['ID'] . "'";
+
+                $result = mysqli_query($conn, $query);
+
+
+                controler_bot($config['URL'], $metodos['ENVIAR'], array(
+
+                    'BOT_ID=' . $config['BOT_ID'] . '&',
+                    'CLIENT_ID=' . $config['CLIENT_ID'] . '&',
+                    'DIALOG_ID=chat' . $_REQUEST['data']['PARAMS']['CHAT_ID'] . '&',
+                    'MESSAGE=' . $config['CAPTURA_DOCUMENTO']
+
+                ));
 
                 sleep(1);
 
@@ -427,12 +539,34 @@ if ($_REQUEST['event'] != 'ONIMBOTJOINCHAT') {
                     'MESSAGE=' . $config['CAPTURA_CPF']
 
                 ));
-                
-return true;
 
-            } elseif ($row['ETAPA'] == '4' && $row['NEGATIVADO'] == '2') {
+                sleep(1);
 
-                $query = "UPDATE conversas SET `ETAPA` = '4'" . " WHERE `ID` = '" . $row['ID'] . "'";
+                controler_bot($config['URL'], $metodos['ENVIAR'], array(
+
+                    'BOT_ID=' . $config['BOT_ID'] . '&',
+                    'CLIENT_ID=' . $config['CLIENT_ID'] . '&',
+                    'DIALOG_ID=chat' . $_REQUEST['data']['PARAMS']['CHAT_ID'] . '&',
+                    'MESSAGE=' . $config['CAPTURA_CNPJ']
+
+                ));
+              
+                sleep(1);
+
+                controler_bot($config['URL'], $metodos['ENVIAR'], array(
+
+                    'BOT_ID=' . $config['BOT_ID'] . '&',
+                    'CLIENT_ID=' . $config['CLIENT_ID'] . '&',
+                    'DIALOG_ID=chat' . $_REQUEST['data']['PARAMS']['CHAT_ID'] . '&',
+                    'MESSAGE=' . $config['CAPTURA_AMBOS']
+
+                ));
+              
+                sleep(1);
+
+            } elseif ($row['ETAPA'] == '6' && $row['NEGATIVADO'] == '2') {
+
+                $query = "UPDATE conversas SET `ETAPA` = '7'" . " WHERE `ID` = '" . $row['ID'] . "'";
 
                 $result = mysqli_query($conn, $query);
 
@@ -441,9 +575,34 @@ return true;
                     'BOT_ID=' . $config['BOT_ID'] . '&',
                     'CLIENT_ID=' . $config['CLIENT_ID'] . '&',
                     'DIALOG_ID=chat' . $_REQUEST['data']['PARAMS']['CHAT_ID'] . '&',
-                    'MESSAGE=' . $config['FORA_ENC2']
+                    'MESSAGE=' . $config['ENC_CONS']
 
                 ));
+                
+                    sleep(1);
+
+                    controler_bot($config['URL'], $metodos['ENVIAR'], array(
+
+                        'BOT_ID=' . $config['BOT_ID'] . '&',
+                        'CLIENT_ID=' . $config['CLIENT_ID'] . '&',
+                        'DIALOG_ID=chat' . $_REQUEST['data']['PARAMS']['CHAT_ID'] . '&',
+                        'MESSAGE=' . $config['FORA_ENC2']
+    
+                    ));
+                    
+                        sleep(2);
+
+                        controler_bot($config['URL'], $metodos['ENVIAR'], array(
+
+                            'BOT_ID=' . $config['BOT_ID'] . '&',
+                            'CLIENT_ID=' . $config['CLIENT_ID'] . '&',
+                            'DIALOG_ID=chat' . $_REQUEST['data']['PARAMS']['CHAT_ID'] . '&',
+                            'MESSAGE=' . $config['FORA_ENC3']
+        
+                        ));
+
+
+                                   
 
 return true;
                 
